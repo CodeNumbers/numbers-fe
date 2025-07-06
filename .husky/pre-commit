@@ -1,0 +1,3 @@
+echo "🖌️ Linting your project..."
+
+npx lint-staged
