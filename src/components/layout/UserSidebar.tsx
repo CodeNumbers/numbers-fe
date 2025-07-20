@@ -20,7 +20,7 @@ const items = [
 
 export default function UserSidebar() {
   return (
-    <Sidebar>
+    <Sidebar className="z-100">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
