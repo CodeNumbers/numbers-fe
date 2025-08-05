@@ -1,19 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-export const useCarousel = (images: readonly string[], interval: number) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export const useCarousel = <T>(imageList: T[], interval: number, autoPlay: boolean = false) => {
+  const [centerIndex, setCenterIndex] = useState<number>(0);
+  const [isAutoPlay, setIsAutoPlay] = useState<boolean>(autoPlay);
 
   useEffect(() => {
+    if (!isAutoPlay) return;
+
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
+      const nextIndex = (centerIndex + 1) % imageList.length;
+      setCenterIndex(nextIndex);
     }, interval);
 
     return () => clearInterval(timer);
-  }, [images.length, interval]);
+  }, [isAutoPlay, centerIndex, imageList.length, interval]);
 
-  const getPositionIndex = (index: number) => {
-    return (index - currentIndex + images.length) % images.length;
+  const getPositionIndex = (imageIndex: number): number => {
+    return (imageIndex - centerIndex + imageList.length) % imageList.length;
   };
 
-  return { currentIndex, getPositionIndex };
+  return {
+    getPositionIndex,
+    setCenterIndex,
+    setIsAutoPlay,
+  };
 };
