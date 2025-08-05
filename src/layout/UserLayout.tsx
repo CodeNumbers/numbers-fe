@@ -1,13 +1,13 @@
-import Header from "@/components/header/UserHeader";
-import Sidebar from "@/components/sidebar/UserSidebar";
-import Footer from "@/components/footer/UserFooter";
-import { Outlet } from "react-router-dom";
+import Header from '@/components/layout/UserHeader';
+import Footer from '@/components/layout/UserFooter';
+import Sidebar from '@/components/layout/UserSidebar';
+import { Outlet } from 'react-router-dom';
 
 export default function UserLayout() {
   return (
-    <div className="flex flex-1 flex-col min-h-screen">
+    <div className="flex flex-1 flex-col overflow-hidden">
       <Header />
-      <main className="flex flex-1">
+      <main className="flex-1">
         <Sidebar />
         <Outlet />
       </main>
