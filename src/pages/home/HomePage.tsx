@@ -9,7 +9,7 @@ import { CarouselNav } from './components/CarouseNav';
 import { CarouselItem } from './components/CarouseItem';
 import { cn } from '@/lib/utils';
 
-const AUTO_PLAY_INTERVAL = 3000;
+const AUTO_PLAY_INTERVAL = 3500;
 const MAX_DISPLAY_COUNT = 5;
 const CENTER_INDEX = Math.floor(MAX_DISPLAY_COUNT / 2);
 
@@ -31,14 +31,18 @@ export default function HomePage() {
   const displayListLength = displayList.length;
   const initialIndex = musicalIdParam > 0 ? displayList.findIndex(({ id }) => id === musicalIdParam) : CENTER_INDEX;
 
-  const { currentIndex, setCurrentIndex } = useCarousel(
+  const { currentIndex, setCurrentIndex, setIsAutoPlay } = useCarousel(
     displayList,
     initialIndex >= 0 ? initialIndex : CENTER_INDEX,
-    AUTO_PLAY_INTERVAL
+    AUTO_PLAY_INTERVAL,
+    true
   );
 
   // 캐러셀 이동 핸들러
-  const handleMove = (dir: 1 | -1) => setCurrentIndex((prev) => (prev + dir + displayListLength) % displayListLength);
+  const handleMove = (dir: 1 | -1) => {
+    setIsAutoPlay(false);
+    setCurrentIndex((prev) => (prev + dir + displayListLength) % displayListLength);
+  };
 
   // 휠 이벤트 핸들러
   const { handleWheel } = useWheel({ onWheel: (scrollDirection) => handleMove(scrollDirection > 0 ? 1 : -1) });
