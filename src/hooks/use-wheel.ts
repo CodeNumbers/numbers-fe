@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 interface Props {
   WHEEL_TIMEOUT?: number;
-  onWheel: (deltaY: number) => void;
+  onWheel: (scrollDirection: number) => void;
 }
 
 export function useWheel({ WHEEL_TIMEOUT = 200, onWheel }: Props) {
@@ -12,7 +12,8 @@ export function useWheel({ WHEEL_TIMEOUT = 200, onWheel }: Props) {
     if (wheelTimeout.current) return;
 
     e.preventDefault();
-    onWheel(e.deltaY);
+    const scrollDirection = e.deltaY;
+    onWheel(scrollDirection);
 
     wheelTimeout.current = setTimeout(() => (wheelTimeout.current = null), WHEEL_TIMEOUT);
   };
