@@ -7,7 +7,7 @@ export interface GetMusicalListParams {
 }
 
 export interface GetMusicalListResponseData {
-  id: string;
+  id: number;
   title: string;
   poster: {
     imageUrl: string;
