@@ -1,9 +1,9 @@
 import { SearchIcon } from 'lucide-react';
-import { Input } from '../ui/Input';
+import { Input } from '@/components/ui/Input';
 import { SidebarTrigger } from '@/components/ui/Sidebar';
 import { cn } from '@/lib/utils';
 
-export default function UserHeader() {
+export default function Header() {
   const handleSearch = () => {
     console.log('search');
   };
@@ -24,6 +24,7 @@ export default function UserHeader() {
         placeholder="Search"
         onClick={handleSearch}
         leftSection={<SearchIcon onClick={handleSearch} className="cursor-pointer" />}
+        classNames={{ container: 'w-64' }}
       />
     </header>
   );
