@@ -1,21 +1,26 @@
+import type { GetPosterListResponseData } from '@/hooks/queries/poster/useGetPosterList';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
-  poster: {
-    id: number;
-    imageUrl: string;
-  };
+  poster: GetPosterListResponseData;
   positionIndex: number;
 }
 
-export function CarouselItem({ poster, positionIndex }: Props) {
+export function PosterItem({ poster, positionIndex }: Props) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/musical/${poster.musicalId}`);
+  };
+
   return (
     <motion.img
-      key={poster.id}
+      key={poster.musicalId}
+      onClick={handleClick}
       src={poster.imageUrl}
-      // TODO: alt 수정 필요
-      alt={`${poster.id} poster`}
-      className="absolute left-1/2 -translate-x-1/2 rounded-xl object-cover w-[calc(120px+7vw)] h-[calc(170px+7vw)] bg-primary"
+      alt={`${poster.musicalId} poster`}
+      className="cursor-pointer absolute object-cover left-1/2 -translate-x-1/2 rounded-xl w-[calc(120px+7vw)] h-[calc(170px+7vw)] bg-black"
       initial={{ ...positionStyles[positionIndex] }}
       animate={{ ...positionStyles[positionIndex] }}
     />
