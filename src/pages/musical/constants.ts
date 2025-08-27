@@ -1,0 +1,3 @@
+export const CAROUSEL_ITEM_COUNT = 5;
+export const CAROUSEL_CENTER_INDEX = Math.floor(CAROUSEL_ITEM_COUNT / 2);
+export const CAROUSEL_AUTOPLAY_INTERVAL = 3500;
