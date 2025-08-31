@@ -13,9 +13,7 @@ export default function MusicalPage() {
 
   // 포스터 목록 조회 (선택 메뉴 없으면 랜덤)
   const { data: posterListResponse } = useGetPosterList({
-    limit: CAROUSEL_ITEM_COUNT,
-    initialRange: selectedMenuLabel,
-    ...(isMenuItemSelected ? { mode: POSTER_SEARCH_KEYWORD.VIEWS } : { mode: POSTER_SEARCH_KEYWORD.RANDOM }),
+    ...(isMenuItemSelected ? { initialRange: selectedMenuLabel } : { mode: POSTER_SEARCH_KEYWORD.RANDOM, limit: CAROUSEL_ITEM_COUNT }),
   });
   const posterList = posterListResponse?.data ?? [];
   const posterListLength = posterList?.length ?? 0;

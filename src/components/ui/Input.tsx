@@ -3,25 +3,23 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 interface Props extends React.ComponentProps<'input'> {
-  classNames?: {
-    container?: string;
-    input?: string;
-  };
+  error?: string;
+  classNames?: { container?: string; input?: string };
   leftSection?: React.ReactNode;
   rightSection?: React.ReactNode;
 }
 
 function Input(props: Props) {
-  const { type, classNames, leftSection, rightSection, ...rest } = props;
+  const { type, classNames, leftSection, rightSection, error, ...rest } = props;
 
   return (
     <div
       className={cn(
         'flex items-center gap-2 px-2.5 py-1 h-9 w-full',
         'rounded-md border border-input shadow-xs',
-        'focus-within:border focus-within:border-primary',
         'selection:bg-primary selection:text-primary-foreground dark:bg-input/30',
-        classNames?.container
+        classNames?.container,
+        error ? 'border-destructive' : 'focus-within:border focus-within:border-primary'
       )}
     >
       {leftSection}

@@ -32,10 +32,12 @@ export default function Sidebar() {
     setSelectedMenuItem(menuItem);
   };
 
+  console.log(musicalList);
+
   return (
     <SidebarContainer>
       <SidebarContent className="z-10 py-4 bg-black/10 text-white backdrop-blur-sm">
-        {['ㄱ~ㄷ', 'ㄹ~ㅂ', 'ㅅ~ㅈ', 'ㅊ~ㅌ', 'ㅍ~ㅎ', 'A-Z/0~9'].map((menuLabel) => {
+        {['ㄱ~ㄷ', 'ㄹ~ㅂ', 'ㅅ~ㅈ', 'ㅊ~ㅌ', 'ㅍ~ㅎ', 'A~Z/0~9'].map((menuLabel) => {
           const isSelected = selectedMenuLabel === menuLabel;
 
           return (
@@ -55,13 +57,13 @@ export default function Sidebar() {
               >
                 {/* 메뉴 */}
                 <SidebarMenu>
-                  {musicalList?.map(({ musicalId, title: musicalTitle }) => {
+                  {musicalList?.map(({ musicalId, musicalTitle }) => {
                     const isActive = musicalId === selectedMenuItem;
 
                     return (
                       <SidebarMenuItem key={musicalId} onClick={(e) => handleMenuItemClick(e, musicalId)}>
                         <SidebarMenuButton className={cn(isActive && 'font-semibold text-primary', 'cursor-pointer')}>
-                          {musicalTitle} {musicalId}
+                          {musicalTitle}
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     );

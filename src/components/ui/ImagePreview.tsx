@@ -1,13 +1,17 @@
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
+import { useState, forwardRef, useImperativeHandle, useRef } from 'react';
 import { Input } from './Input';
 
-interface Props {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   previewUrl?: string | null;
   onFileChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function ImagePreview({ previewUrl, onFileChange }: Props) {
+const ImagePreview = forwardRef<HTMLInputElement, Props>(function ImagePreview({ previewUrl, onFileChange, ...props }, ref) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // 외부 ref를 내부 input ref에 연결
+  useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
   const [preview, setPreview] = useState<string | null>(previewUrl ?? null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +34,7 @@ export default function ImagePreview({ previewUrl, onFileChange }: Props) {
       )}
       {/* 이미지 업로드 */}
       <Input
+        ref={inputRef}
         type="file"
         accept="image/*"
         onChange={handleFileChange}
@@ -40,7 +45,10 @@ export default function ImagePreview({ previewUrl, onFileChange }: Props) {
             'file:text-white file:bg-gray-800 file:border-0 file:rounded file:px-2 file:mr-2 file:cursor-pointer file:hover:bg-gray-700'
           ),
         }}
+        {...props}
       />
     </div>
   );
-}
+});
+
+export default ImagePreview;

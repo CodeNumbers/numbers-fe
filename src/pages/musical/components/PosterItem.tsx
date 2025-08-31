@@ -1,3 +1,4 @@
+import { useSidebar } from '@/components/ui/Sidebar';
 import type { GetPosterListResponseData } from '@/hooks/queries/poster/useGetPosterList';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -9,9 +10,11 @@ interface Props {
 
 export function PosterItem({ poster, positionIndex }: Props) {
   const navigate = useNavigate();
+  const { setOpen } = useSidebar();
 
   const handleClick = () => {
     navigate(`/musical/${poster.musicalId}`);
+    setOpen(false);
   };
 
   return (

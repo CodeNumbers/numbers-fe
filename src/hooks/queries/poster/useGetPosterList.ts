@@ -16,7 +16,7 @@ export interface GetPosterListParams {
 
 export interface GetPosterListResponseData {
   musicalId: number;
-  title: string;
+  musicalTitle: string;
   imageUrl: string;
 }
 
